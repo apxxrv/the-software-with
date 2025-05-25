@@ -3,6 +3,8 @@ import type { Metadata } from "next"
 import { Archivo_Black } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
+import { Toaster } from 'sonner'
+import { Navbar } from '@/components/layout/Navbar'
 
 const archivo = Archivo_Black({
   weight: "400",
@@ -22,10 +24,12 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${archivo.variable} font-sans antialiased bg-black text-white`}>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
-          {children}
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <Navbar />
+          <main>{children}</main>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
